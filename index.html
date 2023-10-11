@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calcutator</title>
+    <style>
+        body {
+            background:gray;
+        }
+    </style>
+</head>
+<body>
+    <div style=margin:100px">
+        Price Amount : <input type="number" min="0" placeholder="price value" id="amount" required value="28999"><br>
+        Discount Price (%) : <input type="number" min="0" placeholder="percentage" id="percentage" required value="10"><br>
+        You saved : <input type="number" min="0" placeholder="0" readonly id="discount"><br>
+        <hr>
+        Price after discount:  <input type="number" min="0" placeholder="0" readonly id="final_price"><br>
+        <button id="btn">Calculate</button>
+        <button id="clear">clear</button>
+    </div>
+
+
+
+    <script>
+        var amount = document.querySelector('#amount');
+        var percentage = document.querySelector('#percentage');
+        var discount = document.querySelector('#discount');
+        var final_price = document.querySelector('#final_price');
+
+        // onclick calculation area
+        document.querySelector('#btn').addEventListener('click', function(){
+            // (28999*10)/100
+            
+            if (amount.value != '' && percentage.value != ''){
+
+                var amount_float = parseFloat(amount.value);
+                var percentage_float = parseFloat(percentage.value);
+
+
+                if (!isNaN(amount_float) && !isNaN(percentage_float)){
+
+                    discount_output = (amount_float*percentage_float)/100;
+                    final_price_output = amount.value - discount_output;
+                    
+                    discount.value = discount_output.toFixed(2);
+                    final_price.value = final_price_output.toFixed(2);
+                    // alert('I clicked the button');
+                }
+                else{
+                    alert('Please enter valid numbers for amount and percentage.');
+                }
+
+            
+            }
+            else{
+                alert('Please enter a valid data');
+            }
+             
+        });
+        // onclick calculation end
+
+        // clear onlick event
+        document.querySelector('#clear').addEventListener('click', function(){
+            amount.value = '';
+            percentage.value = '';
+            discount.value = 0;
+            final_price.value = 0;
+        });// clear onlick event end
+    
+    </script>
+</body>
+</html>
